@@ -57,19 +57,23 @@ data.test<-data[data$syear=="1998",]
 data.train.sf<-data.sf[data.sf$syear!="1998",]
 data.test.sf<-data.sf[data.sf$syear=="1998",]
 
-# plot of data and map
+# plot of data and map: all dataset plot
 plot(st_geometry(map), mar=c(1,1,1,1))
 plot(st_geometry(data.sf), add=TRUE, bg="red", pch=21)
 degAxis(1)
 degAxis(2)
 
+# ---------- Plot for TRAIN SET ---------------
 plot(st_geometry(map), mar=c(1,1,1,1))
 plot(st_geometry(data.train.sf), add=TRUE, bg="red", pch=21)
+title("Train set - OLS regression")
 degAxis(1)
 degAxis(2)
 
+# ------------------- plot for DATA SET --------------
 plot(st_geometry(map), mar=c(1,1,1,1))
 plot(st_geometry(data.test.sf), add=TRUE, bg="red", pch=21)
+title("Data set - OLS regression")
 degAxis(1)
 degAxis(2)
 
@@ -95,7 +99,6 @@ prediction<-predict.lm(model.lm, data.test)
 data.pred.OLS<-data.frame(obs=data.test$log_price, pred=prediction)
 missing.OLS<-which(is.na(data.pred.OLS$pred)==TRUE)
 data.pred.OLS<-data.pred.OLS[-missing.OLS,] # to eliminate NAs
-
 
 #------------------------------TESTs-----------------------------------------------
 
